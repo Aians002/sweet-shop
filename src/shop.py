@@ -29,3 +29,8 @@ class Shop:
         if max_price is not None:
             results = [sweet for sweet in results if sweet.price <= max_price]
         return results
+    
+    def sort_sweets(self, by="price"):
+        if by not in ["price", "name"]:
+            raise ValueError("Sort by 'price' or 'name' only")
+        return sorted(self.sweets.values(), key=lambda x: x.price if by == "price" else x.name)
