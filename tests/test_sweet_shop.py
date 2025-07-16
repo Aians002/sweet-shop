@@ -44,6 +44,36 @@ class TestSweetShop(unittest.TestCase):
         self.assertIn(sweet1, sweets)
         self.assertIn(sweet2, sweets)
 
+    def test_search_by_name(self):
+        shop = Shop()
+        sweet1 = Sweet(id=1001, name="Kaju Katli", category="Nut-Based", price=50.0, quantity=20)
+        sweet2 = Sweet(id=1002, name="Gulab Jamun", category="Milk-Based", price=10.0, quantity=50)
+        shop.add_sweet(sweet1)
+        shop.add_sweet(sweet2)
+        results = shop.search_sweets(name="Kaju")
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0], sweet1)
+
+    def test_search_by_category(self):
+        shop = Shop()
+        sweet1 = Sweet(id=1001, name="Kaju Katli", category="Nut-Based", price=50.0, quantity=20)
+        sweet2 = Sweet(id=1002, name="Gulab Jamun", category="Milk-Based", price=10.0, quantity=50)
+        shop.add_sweet(sweet1)
+        shop.add_sweet(sweet2)
+        results = shop.search_sweets(category="Milk-Based")
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0], sweet2)
+
+    def test_search_by_price_range(self):
+        shop = Shop()
+        sweet1 = Sweet(id=1001, name="Kaju Katli", category="Nut-Based", price=50.0, quantity=20)
+        sweet2 = Sweet(id=1002, name="Gulab Jamun", category="Milk-Based", price=10.0, quantity=50)
+        shop.add_sweet(sweet1)
+        shop.add_sweet(sweet2)
+        results = shop.search_sweets(min_price=5.0, max_price=20.0)
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0], sweet2)
+
     # def test_sweet_initialization(self):
     #     sweet = Sweet(1, "Chocolate", "Candy", 2.5, 10)
     #     self.assertEqual(sweet.id, 1)

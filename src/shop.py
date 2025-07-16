@@ -17,3 +17,15 @@ class Shop:
 
     def view_sweets(self):
         return list(self.sweets.values())
+    
+    def search_sweets(self, name=None, category=None, min_price=None, max_price=None):
+        results = list(self.sweets.values())
+        if name:
+            results = [sweet for sweet in results if name.lower() in sweet.name.lower()]
+        if category:
+            results = [sweet for sweet in results if sweet.category.lower() == category.lower()]
+        if min_price is not None:
+            results = [sweet for sweet in results if sweet.price >= min_price]
+        if max_price is not None:
+            results = [sweet for sweet in results if sweet.price <= max_price]
+        return results
