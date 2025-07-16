@@ -14,3 +14,6 @@ class Shop:
         if id not in self.sweets:
             raise ValueError("Sweet ID does not exist")
         del self.sweets[id]
+
+    def view_sweets(self):
+        return list(self.sweets.values())
