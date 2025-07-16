@@ -115,6 +115,27 @@ class TestSweetShop(unittest.TestCase):
             shop.purchase_sweet(9999, 5)
         self.assertEqual(str(cm.exception), "Sweet ID does not exist")
 
+    def test_restock_sweet(self):
+        shop = Shop()
+        sweet = Sweet(id=1001, name="Kaju Katli", category="Nut-Based", price=50.0, quantity=20)
+        shop.add_sweet(sweet)
+        shop.restock_sweet(1001, 10)
+        self.assertEqual(shop.get_sweet_by_id(1001).quantity, 30)
+
+    def test_restock_nonexistent_sweet(self):
+        shop = Shop()
+        with self.assertRaises(ValueError) as cm:
+            shop.restock_sweet(9999, 10)
+        self.assertEqual(str(cm.exception), "Sweet ID does not exist")
+
+    def test_restock_negative_quantity(self):
+        shop = Shop()
+        sweet = Sweet(id=1001, name="Kaju Katli", category="Nut-Based", price=50.0, quantity=20)
+        shop.add_sweet(sweet)
+        with self.assertRaises(ValueError) as cm:
+            shop.restock_sweet(1001, -5)
+        self.assertEqual(str(cm.exception), "Restock quantity cannot be negative")
+
     # def test_sweet_initialization(self):
     #     sweet = Sweet(1, "Chocolate", "Candy", 2.5, 10)
     #     self.assertEqual(sweet.id, 1)
