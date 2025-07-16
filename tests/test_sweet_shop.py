@@ -3,6 +3,7 @@ from src.sweet import Sweet
 from src.shop import Shop
 
 class TestSweetShop(unittest.TestCase):
+    # Test adding a sweet
     def test_add_sweet(self):
         shop = Shop()
         sweet = Sweet(id=1001, name="Kaju Katli", category="Nut-Based", price=50.0, quantity=20)
@@ -19,6 +20,7 @@ class TestSweetShop(unittest.TestCase):
             shop.add_sweet(sweet2)
         self.assertEqual(str(cm.exception), "Sweet ID already exists")
 
+    # Test deleting a sweet
     def test_delete_sweet(self):
         shop = Shop()
         sweet = Sweet(id=1001, name="Kaju Katli", category="Nut-Based", price=50.0, quantity=20)
@@ -33,6 +35,7 @@ class TestSweetShop(unittest.TestCase):
             shop.delete_sweet(9999)
         self.assertEqual(str(cm.exception), "Sweet ID does not exist")
 
+    # Test viewing sweets
     def test_view_sweets(self):
         shop = Shop()
         sweet1 = Sweet(id=1001, name="Kaju Katli", category="Nut-Based", price=50.0, quantity=20)
@@ -44,6 +47,7 @@ class TestSweetShop(unittest.TestCase):
         self.assertIn(sweet1, sweets)
         self.assertIn(sweet2, sweets)
 
+    # Test searching sweets
     def test_search_by_name(self):
         shop = Shop()
         sweet1 = Sweet(id=1001, name="Kaju Katli", category="Nut-Based", price=50.0, quantity=20)
@@ -74,6 +78,7 @@ class TestSweetShop(unittest.TestCase):
         self.assertEqual(len(results), 1)
         self.assertEqual(results[0], sweet2)
 
+    # Test sorting sweets
     def test_sort_sweets_by_price(self):
         shop = Shop()
         sweet1 = Sweet(id=1001, name="Kaju Katli", category="Nut-Based", price=50.0, quantity=20)
@@ -94,6 +99,7 @@ class TestSweetShop(unittest.TestCase):
         self.assertEqual(sorted_sweets[0], sweet2)
         self.assertEqual(sorted_sweets[1], sweet1)
 
+    # Test purchasing a sweet
     def test_purchase_sweet(self):
         shop = Shop()
         sweet = Sweet(id=1001, name="Kaju Katli", category="Nut-Based", price=50.0, quantity=20)
@@ -115,6 +121,7 @@ class TestSweetShop(unittest.TestCase):
             shop.purchase_sweet(9999, 5)
         self.assertEqual(str(cm.exception), "Sweet ID does not exist")
 
+    # Test restocking a sweet
     def test_restock_sweet(self):
         shop = Shop()
         sweet = Sweet(id=1001, name="Kaju Katli", category="Nut-Based", price=50.0, quantity=20)
