@@ -34,3 +34,11 @@ class Shop:
         if by not in ["price", "name"]:
             raise ValueError("Sort by 'price' or 'name' only")
         return sorted(self.sweets.values(), key=lambda x: x.price if by == "price" else x.name)
+    
+    def purchase_sweet(self, id, quantity):
+        sweet = self.get_sweet_by_id(id)
+        if not sweet:
+            raise ValueError("Sweet ID does not exist")
+        if sweet.quantity < quantity:
+            raise ValueError("Insufficient stock")
+        sweet.quantity -= quantity

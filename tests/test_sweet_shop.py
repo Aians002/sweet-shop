@@ -94,6 +94,27 @@ class TestSweetShop(unittest.TestCase):
         self.assertEqual(sorted_sweets[0], sweet2)
         self.assertEqual(sorted_sweets[1], sweet1)
 
+    def test_purchase_sweet(self):
+        shop = Shop()
+        sweet = Sweet(id=1001, name="Kaju Katli", category="Nut-Based", price=50.0, quantity=20)
+        shop.add_sweet(sweet)
+        shop.purchase_sweet(1001, 5)
+        self.assertEqual(shop.get_sweet_by_id(1001).quantity, 15)
+
+    def test_purchase_sweet_insufficient_stock(self):
+        shop = Shop()
+        sweet = Sweet(id=1001, name="Kaju Katli", category="Nut-Based", price=50.0, quantity=3)
+        shop.add_sweet(sweet)
+        with self.assertRaises(ValueError) as cm:
+            shop.purchase_sweet(1001, 5)
+        self.assertEqual(str(cm.exception), "Insufficient stock")
+
+    def test_purchase_nonexistent_sweet(self):
+        shop = Shop()
+        with self.assertRaises(ValueError) as cm:
+            shop.purchase_sweet(9999, 5)
+        self.assertEqual(str(cm.exception), "Sweet ID does not exist")
+
     # def test_sweet_initialization(self):
     #     sweet = Sweet(1, "Chocolate", "Candy", 2.5, 10)
     #     self.assertEqual(sweet.id, 1)
