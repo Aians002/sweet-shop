@@ -9,3 +9,8 @@ class Shop:
 
     def get_sweet_by_id(self, id):
         return self.sweets.get(id)
+    
+    def delete_sweet(self, id):
+        if id not in self.sweets:
+            raise ValueError("Sweet ID does not exist")
+        del self.sweets[id]

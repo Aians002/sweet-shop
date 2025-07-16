@@ -19,6 +19,20 @@ class TestSweetShop(unittest.TestCase):
             shop.add_sweet(sweet2)
         self.assertEqual(str(cm.exception), "Sweet ID already exists")
 
+    def test_delete_sweet(self):
+        shop = Shop()
+        sweet = Sweet(id=1001, name="Kaju Katli", category="Nut-Based", price=50.0, quantity=20)
+        shop.add_sweet(sweet)
+        shop.delete_sweet(1001)
+        self.assertIsNone(shop.get_sweet_by_id(1001))
+        self.assertEqual(len(shop.sweets), 0)
+
+    def test_delete_nonexistent_sweet(self):
+        shop = Shop()
+        with self.assertRaises(ValueError) as cm:
+            shop.delete_sweet(9999)
+        self.assertEqual(str(cm.exception), "Sweet ID does not exist")
+
     # def test_sweet_initialization(self):
     #     sweet = Sweet(1, "Chocolate", "Candy", 2.5, 10)
     #     self.assertEqual(sweet.id, 1)
