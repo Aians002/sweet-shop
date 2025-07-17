@@ -1,16 +1,11 @@
-<<<<<<< HEAD
 Sweet Shop Management System
 A web-based application to manage a sweet shop, built with Python, Flask, and tested using TDD principles. Users can add, delete, view, search, sort, purchase, and restock sweets through a web interface.
 Setup
-=======
-# Sweet Shop Management System
->>>>>>> 6bbf6aae012ca836188fed7008a4dd57a3b0a379
 
 Clone the repository:
 git clone <repository-url>
 cd sweet-shop-system
 
-<<<<<<< HEAD
 Create and activate a virtual environment:
 python -m venv venv
 source venv/bin/activate # On Windows: venv\Scripts\activate
@@ -41,12 +36,3 @@ Notes
 Data is stored in memory using a dictionary, so it resets when the app restarts.
 The web interface uses Flask and Bootstrap for a responsive design.
 All functionalities are backed by comprehensive unit tests in tests/test_sweet_shop.py.
-=======
-Written tests using unittest library in Python
-
-Tests are stored in tests/ folder
-
-Main system is stored in main/ folder
-
-run main.py in src for command line interface for the system
->>>>>>> 6bbf6aae012ca836188fed7008a4dd57a3b0a379
