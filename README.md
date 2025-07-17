@@ -3,7 +3,7 @@ A web-based application to manage a sweet shop, built with Python, Flask, and te
 Setup
 
 Clone the repository:
-git clone <repository-url>
+git clone <https://github.com/Aians002/sweet-shop>
 cd sweet-shop-system
 
 Create and activate a virtual environment:
