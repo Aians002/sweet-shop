@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>View Sweets</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <nav class="navbar">
+        <br><br>
+        <a href="/">Home</a>
+        <a href="/add_sweet">Add Sweet</a>
+        <a href="/view_sweets">View Sweets</a>
+        <a href="/search_sweets">Search Sweets</a>
+    </nav>
+    <div class="container">
+        <h1>Available Sweets</h1>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <div style="margin-bottom: 15px;">
+            <a href="{{ url_for('sort_sweets', by='price') }}">Sort by Price</a>
+            <a href="{{ url_for('sort_sweets', by='name') }}">Sort by Name</a>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sweet in sweets %}
+                <tr>
+                    <td>{{ sweet.id }}</td>
+                    <td>{{ sweet.name }}</td>
+                    <td>{{ sweet.category }}</td>
+                    <td>{{ sweet.price }}</td>
+                    <td>{{ sweet.quantity }}</td>
+                    <td>
+                        <a href="{{ url_for('purchase_sweet', id=sweet.id) }}" class="btn-success">Purchase</a>
+                        <a href="{{ url_for('restock_sweet', id=sweet.id) }}" class="btn-info">Restock</a>
+                        <a href="{{ url_for('delete_sweet', id=sweet.id) }}" class="btn-danger">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
